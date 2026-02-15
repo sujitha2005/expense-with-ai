@@ -34,15 +34,49 @@ export default function MonthlyChart({ expenses }) {
     datasets: [
       {
         label: "Monthly Expenses",
-        data: Object.values(monthMap)
+        data: Object.values(monthMap),
+        backgroundColor: "#10b981",
+        borderColor: "#059669",
+        borderWidth: 1,
+        borderRadius: 8,
+        borderSkipped: false,
       }
     ]
   };
 
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return "₹" + context.parsed.y.toLocaleString();
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function(value) {
+            return "₹" + value.toLocaleString();
+          }
+        }
+      }
+    }
+  };
+
   return (
-    <div style={{ width: "500px" }}>
+    <div style={{ width: "100%", height: "100%" }}>
       <h2>Monthly Report</h2>
-      <Bar data={data} />
+      <div style={{ maxHeight: "300px" }}>
+        <Bar data={data} options={options} />
+      </div>
     </div>
   );
 }

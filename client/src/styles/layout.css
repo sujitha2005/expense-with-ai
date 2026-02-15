@@ -1,11 +1,36 @@
 /* ===== NAVBAR ===== */
 .navbar {
-  background: linear-gradient(90deg, #6366f1, #4f46e5);
+  background: #16a34a;
   color: white;
   padding: 18px 30px;
   font-size: 22px;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
 
 /* ===== LAYOUT WRAPPER ===== */
@@ -16,7 +41,7 @@
 /* ===== SIDEBAR ===== */
 .sidebar {
   width: 230px;
-  background: #111827;
+  background: #065f46;
   min-height: 100vh;
   padding: 25px;
   color: white;
@@ -26,12 +51,12 @@
 .sidebar h3 {
   margin-bottom: 25px;
   font-size: 18px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .sidebar a {
   display: block;
-  color: #9ca3af;
+  color: #d1fae5;
   text-decoration: none;
   margin-bottom: 15px;
   padding: 10px 12px;
@@ -40,16 +65,22 @@
 }
 
 .sidebar a:hover {
-  background: #1f2937;
+  background: rgba(255,255,255,0.2);
   color: white;
   transform: translateX(5px);
+}
+
+.sidebar a.active {
+  background: #10b981;
+  color: white;
+  font-weight: 600;
 }
 
 /* ===== MAIN CONTENT ===== */
 .content {
   flex: 1;
   padding: 30px;
-  background: #f3f4f6;
+  background: #f8fafc;
 }
 
 /* ===== RESPONSIVE ===== */

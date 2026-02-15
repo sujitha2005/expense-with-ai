@@ -4,7 +4,7 @@ import {
   PlusCircle,
   List,
   BarChart3,
-  ArrowUpDown,
+  Download,
   IndianRupee,
   Menu,
   X
@@ -17,7 +17,7 @@ const navItems = [
   { to: "/add", label: "Add Expense", icon: PlusCircle },
   { to: "/expenses", label: "Expense List", icon: List },
   { to: "/reports", label: "Reports", icon: BarChart3 },
-  { to: "/import-export", label: "Import / Export", icon: ArrowUpDown }
+  { to: "/import-export", label: "Import / Export", icon: Download }
 ];
 
 const Sidebar = () => {

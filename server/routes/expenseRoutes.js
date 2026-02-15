@@ -1,5 +1,4 @@
 import express from "express";
-import { protect } from "../middleware/authMiddleware.js";
 import {
   addExpense,
   getExpenses,
@@ -22,7 +21,6 @@ router.delete("/:id", deleteExpense);
 router.put("/:id", updateExpense);
 
 
-router.use(protect);
 
 
 export default router;
