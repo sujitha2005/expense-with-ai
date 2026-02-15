@@ -3,3 +3,33 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f5f6fa;
 }
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f3f4f6;
+}
+
+.auth-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 8px;
+  background: #4e73df;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}

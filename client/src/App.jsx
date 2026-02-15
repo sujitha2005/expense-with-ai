@@ -4,14 +4,15 @@ import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import "./styles/layout.css";
 
-function App() {
+export default function App() {
   return (
     <Router>
       <Navbar />
-      <div style={{ display: "flex" }}>
+      <div className="layout">
         <Sidebar />
-        <div style={{ flex: 1, padding: "30px" }}>
+        <div className="content">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/reports" element={<Reports />} />
@@ -22,5 +23,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

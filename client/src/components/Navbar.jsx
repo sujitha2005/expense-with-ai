@@ -1,12 +1,11 @@
 export default function Navbar() {
   return (
-    <div style={{
-      background: "#111",
-      color: "white",
-      padding: "15px",
-      fontSize: "20px"
-    }}>
-      AI Expense Tracker
+    <div className="navbar">
+      <div className="navbar-title">Dashboard</div>
+
+      <div className="profile">
+        <div className="profile-circle">S</div>
+      </div>
     </div>
   );
 }

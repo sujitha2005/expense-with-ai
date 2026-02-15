@@ -1,0 +1,25 @@
+.reports-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.report-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.export-btn {
+  padding: 8px 12px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.export-btn:hover {
+  background: #15803d;
+}
