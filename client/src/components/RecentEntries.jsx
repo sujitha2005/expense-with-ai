@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function RecentEntries({ expenses = [] }) {
+export default function RecentEntries({ expenses = [], title = "Recent Entries", limit = 5 }) {
     // Helper to format currency
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat("en-IN", {
@@ -17,8 +17,8 @@ export default function RecentEntries({ expenses = [] }) {
         return new Date(dateString).toLocaleDateString("en-IN", options);
     };
 
-    // Get only last 5 entries if not handled by parent
-    const recentExpenses = expenses.slice(0, 5);
+    // Get entries based on limit
+    const recentExpenses = limit ? expenses.slice(0, limit) : expenses;
 
     const getCategoryColor = (category) => {
         switch (category) {
@@ -42,7 +42,7 @@ export default function RecentEntries({ expenses = [] }) {
     return (
         <div className="recent-entries-card">
             <div className="card-header">
-                <h2 className="card-title">Recent Entries</h2>
+                <h2 className="card-title">{title}</h2>
             </div>
             <div className="table-container">
                 <table className="entries-table">

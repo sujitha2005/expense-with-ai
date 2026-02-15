@@ -38,8 +38,11 @@ export default function MonthlyChart({ expenses }) {
         backgroundColor: "#10b981",
         borderColor: "#059669",
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 4,
         borderSkipped: false,
+        barPercentage: 0.6,
+        categoryPercentage: 0.8,
+        maxBarThickness: 50,
       }
     ]
   };
@@ -53,7 +56,7 @@ export default function MonthlyChart({ expenses }) {
       },
       tooltip: {
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             return "₹" + context.parsed.y.toLocaleString();
           }
         }
@@ -63,7 +66,7 @@ export default function MonthlyChart({ expenses }) {
       y: {
         beginAtZero: true,
         ticks: {
-          callback: function(value) {
+          callback: function (value) {
             return "₹" + value.toLocaleString();
           }
         }
