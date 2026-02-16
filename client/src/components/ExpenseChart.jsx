@@ -42,7 +42,7 @@ export default function ExpenseChart({ expenses }) {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom",
@@ -58,7 +58,7 @@ export default function ExpenseChart({ expenses }) {
       },
       tooltip: {
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             return "₹" + context.parsed.toLocaleString();
           }
         }
@@ -69,7 +69,7 @@ export default function ExpenseChart({ expenses }) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <h2>Category Distribution</h2>
-      <div style={{ maxHeight: "300px", display: "flex", justifyContent: "center" }}>
+      <div className="chart-wrapper">
         <Pie data={data} options={options} />
       </div>
     </div>

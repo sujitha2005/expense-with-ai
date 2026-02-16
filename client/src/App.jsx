@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ExpenseProvider } from "./context/ExpenseContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
@@ -7,27 +8,60 @@ import AddExpense from "./pages/AddExpense";
 import ExpenseListPage from "./pages/ExpenseListPage";
 import Reports from "./pages/Reports";
 import ImportExport from "./pages/ImportExport";
+import AuthPage from "./pages/AuthPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./styles/layout.css";
+
+const AppContent = () => {
+  const { user } = useAuth();
+
+  return (
+    <Router>
+      <Navbar />
+      <div className="layout">
+        {user && <Sidebar />}
+        <div className={user ? "content" : "content-full"}>
+          <Routes>
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/add" element={
+              <ProtectedRoute>
+                <AddExpense />
+              </ProtectedRoute>
+            } />
+            <Route path="/expenses" element={
+              <ProtectedRoute>
+                <ExpenseListPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/reports" element={
+              <ProtectedRoute>
+                <Reports />
+              </ProtectedRoute>
+            } />
+            <Route path="/import-export" element={
+              <ProtectedRoute>
+                <ImportExport />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
+};
 
 export default function App() {
   return (
-    <ExpenseProvider>
-      <Router>
-        <Navbar />
-        <div className="layout">
-          <Sidebar />
-          <div className="content">
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/add" element={<AddExpense />} />
-              <Route path="/expenses" element={<ExpenseListPage />} />
-              <Route path="/reports" element={<Reports />} />
-              <Route path="/import-export" element={<ImportExport />} />
-            </Routes>
-          </div>
-        </div>
-      </Router>
-    </ExpenseProvider>
+    <AuthProvider>
+      <ExpenseProvider>
+        <AppContent />
+      </ExpenseProvider>
+    </AuthProvider>
   );
 }
 

@@ -160,7 +160,8 @@
   background-color: #f9fafb;
 }
 
-.amount-cell, .date-cell {
+.amount-cell,
+.date-cell {
   text-align: right;
 }
 
@@ -180,6 +181,25 @@
   color: #6b7280;
 }
 
+/* Month Grouping in Recent Entries */
+.month-group-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+.month-group-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  background: #f9fafb;
+  padding: 0.75rem 1.5rem;
+  margin: 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
 /* Category Badges */
 .category-badge {
   display: inline-flex;
@@ -189,10 +209,37 @@
   font-weight: 500;
 }
 
-.badge-food { background-color: #dcfce7; color: #15803d; }
-.badge-transport { background-color: #dbeafe; color: #1e40af; }
-.badge-entertainment { background-color: #f3e8ff; color: #7e22ce; }
-.badge-bills { background-color: #fef9c3; color: #a16207; }
-.badge-health { background-color: #fee2e2; color: #b91c1c; }
-.badge-education { background-color: #e0e7ff; color: #4338ca; }
-.badge-other { background-color: #f3f4f6; color: #4b5563; }
+.badge-food {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.badge-transport {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-entertainment {
+  background-color: #f3e8ff;
+  color: #7e22ce;
+}
+
+.badge-bills {
+  background-color: #fef9c3;
+  color: #a16207;
+}
+
+.badge-health {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-education {
+  background-color: #e0e7ff;
+  color: #4338ca;
+}
+
+.badge-other {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}

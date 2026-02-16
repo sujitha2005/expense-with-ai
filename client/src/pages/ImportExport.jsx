@@ -1,35 +1,52 @@
 import React, { useState, useEffect } from "react";
+import API from "../api";
 import CSVImport from "../components/CSVImport";
 import ExportButtons from "../components/ExportButtons";
 import CategoryChart from "../components/CategoryChart";
 import CategoryBreakdown from "../components/CategoryBreakdown";
 import RecentEntries from "../components/RecentEntries";
-import API from "../api";
+import { useExpenses } from "../context/ExpenseContext";
 import "../styles/ImportExport.css";
-import "../styles/Reports.css"; // Reuse report styles for grid
 
 export default function ImportExport() {
   const [expenses, setExpenses] = useState([]);
   const [isImportView, setIsImportView] = useState(false);
+  const [fileName, setFileName] = useState("");
+  const { fetchExpenses: refreshGlobal } = useExpenses();
 
   const fetchExpenses = async () => {
     try {
       const res = await API.get("/expenses");
       setExpenses(res.data);
       setIsImportView(false);
+      setFileName("");
+      refreshGlobal(); // Sync global dashboard/sidebar
     } catch (error) {
       console.error("Error fetching expenses for export:", error);
     }
   };
 
-  const handleImportSuccess = (importedData) => {
+  const handleImportSuccess = (importedData, file) => {
     setExpenses(importedData);
     setIsImportView(true);
+    setFileName(file);
+    refreshGlobal(); // Sync global dashboard/sidebar
   };
 
   useEffect(() => {
     fetchExpenses();
   }, []);
+
+  const handleClearImport = () => {
+    fetchExpenses();
+  };
+
+  const groupedExpenses = expenses.reduce((acc, exp) => {
+    const month = new Date(exp.date).toLocaleString("default", { month: "long", year: "numeric" });
+    if (!acc[month]) acc[month] = [];
+    acc[month].push(exp);
+    return acc;
+  }, {});
 
   return (
     <div className="import-export-page">
@@ -45,7 +62,15 @@ export default function ImportExport() {
         <p className="card-description">
           Upload a CSV file with columns: <span className="code-snippet">title, amount, date, category</span>
         </p>
-        <CSVImport refreshExpenses={handleImportSuccess} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
+          <CSVImport refreshExpenses={handleImportSuccess} />
+          {fileName && (
+            <div className="file-info-badge">
+              <span className="file-name">{fileName}</span>
+              <button className="remove-file-btn" onClick={handleClearImport}>×</button>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="function-card">
@@ -86,11 +111,39 @@ export default function ImportExport() {
             <CategoryChart expenses={expenses} />
             <CategoryBreakdown expenses={expenses} />
           </div>
-          <div style={{ marginTop: "2rem" }}>
-            <RecentEntries expenses={expenses} title="All Expenses" limit={null} />
+
+          <div className="expense-list-section" style={{ marginTop: "3rem" }}>
+            <RecentEntries
+              expenses={expenses}
+              title={isImportView ? "Imported Expenses by Month" : "All Expenses by Month"}
+              limit={null}
+              showGrouping={true}
+              showDelete={false}
+            />
           </div>
         </div>
       )}
     </div>
   );
 }
+
+// Helpers (reused from ExpenseListPage)
+const getCategoryColor = (category) => {
+  switch (category) {
+    case "Food": return "badge-food";
+    case "Transport": return "badge-transport";
+    case "Entertainment": return "badge-entertainment";
+    case "Bills": return "badge-bills";
+    case "Health": return "badge-health";
+    case "Education": return "badge-education";
+    default: return "badge-other";
+  }
+};
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(amount);
+};

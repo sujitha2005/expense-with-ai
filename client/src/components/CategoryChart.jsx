@@ -75,7 +75,7 @@ export default function CategoryChart({ expenses = [] }) {
         <div className="reports-card">
             <h3 className="section-title">Category Distribution</h3>
             {expenses.length > 0 ? (
-                <div style={{ height: "300px", position: "relative" }}>
+                <div style={{ height: "250px", position: "relative", width: "100%" }}>
                     <Pie data={data} options={options} />
                 </div>
             ) : (

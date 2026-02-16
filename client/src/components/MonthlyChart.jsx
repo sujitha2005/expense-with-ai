@@ -49,7 +49,7 @@ export default function MonthlyChart({ expenses }) {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
@@ -77,7 +77,7 @@ export default function MonthlyChart({ expenses }) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <h2>Monthly Report</h2>
-      <div style={{ maxHeight: "300px" }}>
+      <div className="chart-wrapper">
         <Bar data={data} options={options} />
       </div>
     </div>

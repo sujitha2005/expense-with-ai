@@ -53,7 +53,7 @@ export default function CSVImport({ refreshExpenses }) {
 
                 if (count > 0) {
                     toast.success(`Successfully imported ${count} expenses!`);
-                    if (refreshExpenses) refreshExpenses(importedItems);
+                    if (refreshExpenses) refreshExpenses(importedItems, file.name);
                 }
 
                 if (errors > 0) {

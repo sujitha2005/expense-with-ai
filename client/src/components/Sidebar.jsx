@@ -10,6 +10,7 @@ import {
   X
 } from "lucide-react";
 import { useState } from "react";
+import { useExpenses } from "../context/ExpenseContext";
 import "../styles/sidebar.css";
 
 const navItems = [
@@ -22,6 +23,25 @@ const navItems = [
 
 const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { expenses } = useExpenses();
+
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
+  const thisMonthTotal = expenses
+    .filter(exp => {
+      const d = new Date(exp.date);
+      return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+    })
+    .reduce((sum, exp) => sum + exp.amount, 0);
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
 
   return (
     <>
@@ -43,9 +63,8 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`sidebar-container ${
-          mobileOpen ? "sidebar-open" : ""
-        }`}
+        className={`sidebar-container ${mobileOpen ? "sidebar-open" : ""
+          }`}
       >
         {/* Logo Section */}
         <div className="sidebar-header">
@@ -80,7 +99,7 @@ const Sidebar = () => {
         {/* Footer Card */}
         <div className="sidebar-footer">
           <p className="footer-label">Total This Month</p>
-          <p className="footer-amount">₹ --</p>
+          <p className="footer-amount">{formatCurrency(thisMonthTotal)}</p>
         </div>
       </aside>
     </>

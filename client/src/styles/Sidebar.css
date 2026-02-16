@@ -14,7 +14,7 @@
 .sidebar-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 30;
   display: none;
 }
@@ -25,11 +25,10 @@
 
 /* ===== SIDEBAR ===== */
 .sidebar-container {
-  position: relative;
+  position: sticky;
   top: 0;
   left: 0;
-  height: auto;
-  min-height: 100vh;
+  height: 100vh;
   width: 260px;
   background: linear-gradient(180deg, #065f46, #047857);
   color: white;
@@ -44,7 +43,7 @@
   align-items: center;
   gap: 12px;
   padding: 25px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo-box {

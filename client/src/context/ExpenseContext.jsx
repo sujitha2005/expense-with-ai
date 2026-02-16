@@ -1,60 +1,71 @@
-import { createContext, useContext, useState } from "react";
-import axios from "axios";
+import { createContext, useContext, useState, useEffect } from "react";
+import API from "../api";
+import toast from "react-hot-toast";
+import { useAuth } from "./AuthContext";
 
-const CATEGORIES = ["Food", "Transport", "Shopping", "Bills", "Entertainment", "Health", "Education", "Other"];
-
-const sampleExpenses = [
-  { id: "1", title: "Groceries", amount: 2500, date: "2025-02-01", category: "Food" },
-  { id: "2", title: "Uber Ride", amount: 350, date: "2025-02-02", category: "Transport" },
-  { id: "3", title: "Netflix Subscription", amount: 649, date: "2025-02-03", category: "Entertainment" },
-  { id: "4", title: "Electricity Bill", amount: 1800, date: "2025-02-04", category: "Bills" },
-  { id: "5", title: "New Shoes", amount: 3200, date: "2025-02-05", category: "Shopping" },
-  { id: "6", title: "Gym Membership", amount: 1500, date: "2025-01-15", category: "Health" },
-  { id: "7", title: "Online Course", amount: 4999, date: "2025-01-20", category: "Education" },
-  { id: "8", title: "Restaurant Dinner", amount: 1200, date: "2025-01-25", category: "Food" },
-  { id: "9", title: "Bus Pass", amount: 500, date: "2025-01-10", category: "Transport" },
-  { id: "10", title: "Movie Tickets", amount: 600, date: "2025-02-10", category: "Entertainment" },
-  { id: "11", title: "Water Bill", amount: 450, date: "2025-02-08", category: "Bills" },
-  { id: "12", title: "Books", amount: 850, date: "2025-02-12", category: "Education" },
-];
+export const CATEGORIES = ["Food", "Transport", "Shopping", "Bills", "Entertainment", "Health", "Education", "Other"];
 
 const ExpenseContext = createContext(undefined);
 
 export const ExpenseProvider = ({ children }) => {
-  const [expenses, setExpenses] = useState(sampleExpenses);
+  const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(false);
 
+
+
+  const addExpense = async (expenseData) => {
+    try {
+      const res = await API.post("/expenses", expenseData);
+      setExpenses((prev) => [res.data, ...prev]);
+      return res.data;
+    } catch (error) {
+      console.error("Error adding expense in context:", error);
+      throw error;
+    }
+  };
+
+  const deleteExpense = async (id) => {
+    try {
+      await API.delete(`/expenses/${id}`);
+      setExpenses((prev) => prev.filter((exp) => (exp._id || exp.id) !== id));
+      toast.success("Expense deleted successfully");
+    } catch (error) {
+      console.error("Error deleting expense in context:", error);
+      const msg = error.response?.data?.message || error.message || "Failed to delete expense";
+      toast.error(msg);
+      throw error;
+    }
+  };
+
+  const { user } = useAuth();
+
   const fetchExpenses = async () => {
+    if (!user) {
+      setExpenses([]);
+      return;
+    }
     setLoading(true);
     try {
-      const res = await axios.get("/api/expenses");
+      const res = await API.get("/expenses");
       setExpenses(res.data);
-    } catch {
-      console.log("Using local expense data");
+    } catch (error) {
+      console.error("Error fetching expenses in context:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const addExpense = async (expense) => {
-    const newExpense = {
-      ...expense,
-      id: Date.now().toString(),
-      category: expense.category || CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)],
-    };
-    try {
-      await axios.post("/api/expenses", expense);
-    } catch {
-    }
-    setExpenses((prev) => [newExpense, ...prev]);
-  };
+  useEffect(() => {
+    fetchExpenses();
+  }, [user]);
 
   return (
-    <ExpenseContext.Provider value={{ expenses, loading, addExpense, fetchExpenses }}>
+    <ExpenseContext.Provider value={{ expenses, loading, fetchExpenses, addExpense, deleteExpense }}>
       {children}
     </ExpenseContext.Provider>
   );
 };
+
 
 export const useExpenses = () => {
   const ctx = useContext(ExpenseContext);
@@ -62,6 +73,6 @@ export const useExpenses = () => {
   return ctx;
 };
 
-export { CATEGORIES };
+
 
 

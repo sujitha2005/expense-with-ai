@@ -29,7 +29,8 @@
 .controls-section {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
     background: white;
     padding: 1rem;
     border-radius: 12px;
@@ -161,6 +162,31 @@
     text-align: right;
     color: #6b7280;
     font-size: 0.875rem;
+}
+
+/* Month Grouping */
+.month-group {
+    background: white;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.month-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    background: #f9fafb;
+    padding: 1rem 1.5rem;
+    margin: 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.expense-list-card {
+    background: none;
+    border: none;
+    box-shadow: none;
 }
 
 /* Responsive */

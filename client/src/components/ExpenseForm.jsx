@@ -3,9 +3,17 @@ import API from "../api";
 import { Plus } from "lucide-react";
 
 export default function ExpenseForm({ fetchExpenses }) {
+  const getLocalDate = () => {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+  const [date, setDate] = useState(getLocalDate());
   const [category, setCategory] = useState("Food");
 
   const categories = ["Food", "Transport", "Entertainment", "Bills", "Health", "Education", "Other"];
@@ -23,7 +31,7 @@ export default function ExpenseForm({ fetchExpenses }) {
 
       setTitle("");
       setAmount("");
-      setDate(new Date().toISOString().split("T")[0]);
+      setDate(getLocalDate());
       setCategory("Food");
       if (fetchExpenses) fetchExpenses();
     } catch (error) {

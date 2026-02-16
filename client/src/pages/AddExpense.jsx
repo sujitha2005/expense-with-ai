@@ -1,24 +1,10 @@
-import { useState, useEffect } from "react";
 import ExpenseForm from "../components/ExpenseForm";
 import RecentEntries from "../components/RecentEntries";
-import API from "../api";
+import { useExpenses } from "../context/ExpenseContext";
 import "../styles/AddExpense.css";
 
 export default function AddExpense() {
-  const [expenses, setExpenses] = useState([]);
-
-  const fetchExpenses = async () => {
-    try {
-      const res = await API.get("/expenses");
-      setExpenses(res.data);
-    } catch (error) {
-      console.error("Error fetching expenses:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchExpenses();
-  }, []);
+  const { expenses, fetchExpenses } = useExpenses();
 
   return (
     <div className="add-expense-page">
