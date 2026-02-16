@@ -10,7 +10,7 @@ import Reports from "./pages/Reports";
 import ImportExport from "./pages/ImportExport";
 import AuthPage from "./pages/AuthPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import "./styles/Layout.css";
+import "./styles/layout.css";
 
 const AppContent = () => {
   const { user } = useAuth();

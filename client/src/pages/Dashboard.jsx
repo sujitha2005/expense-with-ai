@@ -4,7 +4,7 @@ import ExpenseChart from "../components/ExpenseChart";
 import MonthlyChart from "../components/MonthlyChart";
 import { TrendingUp, Calendar, DollarSign, ListTodo, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
-import "../styles/Dashboard.css";
+import "../styles/dashboard.css";
 
 const CATEGORY_COLORS = {
   Food: "#16a34a",
