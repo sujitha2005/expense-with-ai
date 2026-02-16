@@ -3,8 +3,8 @@ import API from "../api";
 import { Search, Filter, Trash2 } from "lucide-react";
 import { useExpenses } from "../context/ExpenseContext";
 import toast from "react-hot-toast";
-import "../styles/expenselist.css";
-import "../styles/addexpense.css"; // Reusing badge styles
+import "../styles/ExpenseListPage.css";
+import "../styles/AddExpense.css"; // Reusing badge styles
 
 export default function ExpenseListPage() {
   const { expenses, fetchExpenses, deleteExpense } = useExpenses();

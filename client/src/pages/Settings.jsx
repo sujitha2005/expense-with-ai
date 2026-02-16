@@ -1,7 +1,7 @@
 // src/pages/Settings.jsx
 
 import { useState } from "react";
-import "../styles/settings.css";
+import "../styles/Settings.css";
 
 export default function Settings() {
   const [darkMode, setDarkMode] = useState(false);

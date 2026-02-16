@@ -1,7 +1,7 @@
 import ExpenseForm from "../components/ExpenseForm";
 import RecentEntries from "../components/RecentEntries";
 import { useExpenses } from "../context/ExpenseContext";
-import "../styles/addexpense.css";
+import "../styles/AddExpense.css";
 
 export default function AddExpense() {
   const { expenses, fetchExpenses } = useExpenses();

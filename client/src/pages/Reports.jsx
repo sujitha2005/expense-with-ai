@@ -4,7 +4,7 @@ import MonthlyChart from "../components/MonthlyChart";
 import CategoryChart from "../components/CategoryChart";
 import CategoryBreakdown from "../components/CategoryBreakdown";
 import MonthlyBreakdown from "../components/MonthlyBreakdown";
-import "../styles/reports.css";
+import "../styles/Reports.css";
 
 export default function Reports() {
   const [expenses, setExpenses] = useState([]);
