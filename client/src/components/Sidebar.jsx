@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useExpenses } from "../context/ExpenseContext";
-import "../styles/Sidebar.css";
+import "../styles/sidebar.css";
 
 const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
