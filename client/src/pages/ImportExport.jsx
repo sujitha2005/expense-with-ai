@@ -6,7 +6,7 @@ import CategoryChart from "../components/CategoryChart";
 import CategoryBreakdown from "../components/CategoryBreakdown";
 import RecentEntries from "../components/RecentEntries";
 import { useExpenses } from "../context/ExpenseContext";
-import "../styles/ImportExport.css";
+import "../styles/importexport.css";
 
 export default function ImportExport() {
   const [expenses, setExpenses] = useState([]);

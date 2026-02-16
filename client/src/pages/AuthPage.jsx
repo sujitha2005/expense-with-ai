@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LogIn, UserPlus, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
-import "../styles/AuthPage.css";
+import "../styles/authpage.css";
 
 export default function AuthPage() {
     const [isLogin, setIsLogin] = useState(true);
